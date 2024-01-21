@@ -8,6 +8,7 @@ History_messaging::History_messaging(std::string username_1, std::string usernam
 	this->username_1 = username_1;
 	this->username_2 = username_2;
 	messages = std::vector<Message>();
+	mtx_messages = new std::mutex();
 }
 
 void History_messaging::add_message(Message message) {
@@ -19,7 +20,7 @@ void History_messaging::add_message(Message message) {
 		throw std::logic_error("The sender is not among the participants of the dialogue!");
 	}
 
-	std::lock_guard<std::mutex> guard(mtx_messages);
+	std::lock_guard<std::mutex> guard(*mtx_messages);
 	messages.push_back(message);
 }
 
@@ -32,6 +33,12 @@ std::string History_messaging::get_username_2() {
 }
 
 std::vector<Message> History_messaging::get_messages() {
-	std::lock_guard<std::mutex> guard(mtx_messages);
+	std::lock_guard<std::mutex> guard(*mtx_messages);
 	return std::vector<Message>(messages);
+}
+
+
+History_messaging::~History_messaging()
+{
+	delete mtx_messages;
 }

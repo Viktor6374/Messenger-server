@@ -6,6 +6,7 @@ User::User(std::string username, std::string first_name, std::string second_name
 	this->first_name = first_name;
 	this->second_name = second_name;
 	this->histories_messaging = std::map<std::string, std::shared_ptr<History_messaging>>();
+	mtx_histories_messaging = new std::mutex();
 }
 
 std::string User::get_username() {
@@ -21,7 +22,7 @@ std::string User::get_second_name() {
 }
 
 std::shared_ptr<History_messaging> User::get_history_messaging(User& user) {
-	std::lock_guard<std::mutex> guard(mtx_histories_messaging);
+	std::lock_guard<std::mutex> guard(*mtx_histories_messaging);
 	if (histories_messaging.count(user.get_username()) == 0) {
 		auto ptr = std::make_shared<History_messaging>(History_messaging(this->username, user.get_username()));
 		
@@ -42,7 +43,7 @@ std::shared_ptr<History_messaging> User::set_history_messaging(std::shared_ptr<H
 		username = (*history).get_username_2();
 	}
 
-	std::lock_guard<std::mutex> guard(mtx_histories_messaging);
+	std::lock_guard<std::mutex> guard(*mtx_histories_messaging);
 	if (histories_messaging.count(username) == 0)
 		this->histories_messaging[username] = history;
 
@@ -55,4 +56,9 @@ bool User::operator == (const User& user) const {
 
 bool User::operator != (const User& user) const {
 	return this->username != user.username;
+}
+
+User::~User()
+{
+	delete mtx_histories_messaging;
 }

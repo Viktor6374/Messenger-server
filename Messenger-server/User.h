@@ -5,6 +5,8 @@
 #include"History_messaging.h"
 #include <memory>
 
+class History_messaging;
+
 class User
 {
 private:
@@ -12,7 +14,7 @@ private:
 	std::string first_name;
 	std::string second_name;
 	std::map<std::string, std::shared_ptr<History_messaging>> histories_messaging;
-	std::mutex mtx_histories_messaging;
+	std::mutex * mtx_histories_messaging;
 
 public:
 	User(std::string username, std::string first_name, std::string second_name);
@@ -23,5 +25,6 @@ public:
 	std::shared_ptr<History_messaging> set_history_messaging(std::shared_ptr<History_messaging> history);
 	bool operator == (const User& user) const;
 	bool operator != (const User& user) const;
+	~User();
 };
 

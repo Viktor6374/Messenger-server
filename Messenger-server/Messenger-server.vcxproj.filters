@@ -19,6 +19,24 @@
     <Filter Include="Файлы заголовков\Entities">
       <UniqueIdentifier>{c88f1865-ad4f-4e04-97ab-82e1e5f30fdd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Network">
+      <UniqueIdentifier>{98bc5428-1c90-4112-8fce-e8a486f613cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Network">
+      <UniqueIdentifier>{03549779-12b5-4b79-b803-3d92700beac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Memory">
+      <UniqueIdentifier>{80ccf98a-0e4f-4dc3-82a0-cabf98ac46c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Memory">
+      <UniqueIdentifier>{abc88046-457a-4203-bb6c-40918943f911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Services">
+      <UniqueIdentifier>{3f736e66-8112-4de4-bbfe-3ce4c3a5c556}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Services">
+      <UniqueIdentifier>{75e449c2-3e10-442a-a012-d2b931b2c665}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Messenger-server.cpp">
@@ -33,6 +51,21 @@
     <ClCompile Include="History_messaging.cpp">
       <Filter>Исходные файлы\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="ServerListener.cpp">
+      <Filter>Исходные файлы\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>Исходные файлы\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryAccess.cpp">
+      <Filter>Исходные файлы\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionContext.cpp">
+      <Filter>Исходные файлы\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedContextSingleton.cpp">
+      <Filter>Исходные файлы\Services</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -46,6 +79,21 @@
     </ClInclude>
     <ClInclude Include="History_messaging.h">
       <Filter>Файлы заголовков\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerListener.h">
+      <Filter>Файлы заголовков\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
+      <Filter>Файлы заголовков\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryAccess.h">
+      <Filter>Файлы заголовков\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="SessionContext.h">
+      <Filter>Файлы заголовков\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedContextSingleton.h">
+      <Filter>Файлы заголовков\Services</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
