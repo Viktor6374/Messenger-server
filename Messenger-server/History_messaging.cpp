@@ -1,13 +1,20 @@
 #include "History_messaging.h"
 #include <stdexcept>
 
-History_messaging::History_messaging(std::string username_1, std::string username_2) {
+History_messaging::History_messaging(std::string username_1, std::string username_2){
 	if (username_1 == username_2) {
 		throw std::logic_error("The user cannot have a chat with himself!");
 	}
 	this->username_1 = username_1;
 	this->username_2 = username_2;
 	messages = std::vector<Message>();
+	mtx_messages = new std::mutex();
+}
+
+History_messaging::History_messaging(const History_messaging& other) {
+	this->username_1 = other.username_1;
+	this->username_2 = other.username_2;
+	messages = other.messages;
 	mtx_messages = new std::mutex();
 }
 

@@ -66,6 +66,9 @@
     <ClCompile Include="SharedContextSingleton.cpp">
       <Filter>Исходные файлы\Services</Filter>
     </ClCompile>
+    <ClCompile Include="InMemory.cpp">
+      <Filter>Исходные файлы\Memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -94,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="SharedContextSingleton.h">
       <Filter>Файлы заголовков\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="InMemory.h">
+      <Filter>Файлы заголовков\Memory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
