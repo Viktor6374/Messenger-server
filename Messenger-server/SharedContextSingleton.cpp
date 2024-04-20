@@ -39,15 +39,16 @@ SharedContextSingleton::SharedContextSingleton() {
     mtx_data = new std::mutex;
 }
 
-void SharedContextSingleton::create_history_messaging(std::string username1, std::string username2){
+void SharedContextSingleton::create_history_messaging(std::string chat_creator, std::string username2, std::shared_ptr<History_messaging> hist){
     std::lock_guard<std::mutex> guard(*mtx_data);
     for (int i = 0; i < sessions.size(); i++) {
         std::string cur_username = sessions[i].get()->get_user().get()->get_username();
-        if (cur_username == username1) {
+        if (cur_username == chat_creator) {
             sessions[i].get()->set_responce_new_chat(username2);
         }
         if (cur_username == username2) {
-            sessions[i].get()->set_responce_new_chat(username1);
+            sessions[i].get()->get_user().get()->set_history_messaging(hist);
+            sessions[i].get()->set_responce_new_chat(chat_creator);
         }
     }
 }
@@ -71,3 +72,7 @@ std::shared_ptr<User> SharedContextSingleton::initialization_session(std::string
 }
 
 //std::shared_ptr<User> SharedContextSingleton::create_new_user(std::string username, std::string first_name, std::string second_name, std::string password) {}
+
+std::vector<std::shared_ptr<SessionContext>> SharedContextSingleton::get_sessions(){
+    return sessions;
+}

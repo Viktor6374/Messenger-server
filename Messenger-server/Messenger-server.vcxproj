@@ -161,6 +161,8 @@
     <Import Project="..\packages\boost.1.84.0\build\boost.targets" Condition="Exists('..\packages\boost.1.84.0\build\boost.targets')" />
     <Import Project="..\packages\boost_thread-vc143.1.84.0\build\boost_thread-vc143.targets" Condition="Exists('..\packages\boost_thread-vc143.1.84.0\build\boost_thread-vc143.targets')" />
     <Import Project="..\packages\boost_chrono-vc143.1.84.0\build\boost_chrono-vc143.targets" Condition="Exists('..\packages\boost_chrono-vc143.1.84.0\build\boost_chrono-vc143.targets')" />
+    <Import Project="..\packages\gtest.1.7.0\build\native\gtest.targets" Condition="Exists('..\packages\gtest.1.7.0\build\native\gtest.targets')" />
+    <Import Project="..\..\Test-messanger-server\packages\gmock.1.11.0\build\native\gmock.targets" Condition="Exists('..\..\Test-messanger-server\packages\gmock.1.11.0\build\native\gmock.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -169,5 +171,7 @@
     <Error Condition="!Exists('..\packages\boost.1.84.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.84.0\build\boost.targets'))" />
     <Error Condition="!Exists('..\packages\boost_thread-vc143.1.84.0\build\boost_thread-vc143.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc143.1.84.0\build\boost_thread-vc143.targets'))" />
     <Error Condition="!Exists('..\packages\boost_chrono-vc143.1.84.0\build\boost_chrono-vc143.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_chrono-vc143.1.84.0\build\boost_chrono-vc143.targets'))" />
+    <Error Condition="!Exists('..\packages\gtest.1.7.0\build\native\gtest.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gtest.1.7.0\build\native\gtest.targets'))" />
+    <Error Condition="!Exists('..\..\Test-messanger-server\packages\gmock.1.11.0\build\native\gmock.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\Test-messanger-server\packages\gmock.1.11.0\build\native\gmock.targets'))" />
   </Target>
 </Project>

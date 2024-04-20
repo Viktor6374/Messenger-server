@@ -5,11 +5,12 @@
 
 int main() {
 //    std::locale::global(std::locale("en_US.utf8"));
-    SetConsoleOutputCP(65001);
-    boost::asio::io_context ioContext;
-    ServerListener server(ioContext, 9000, 4);
-    ioContext.run();
+    
     try {
+        SetConsoleOutputCP(65001);
+        boost::asio::io_context ioContext;
+        ServerListener server(ioContext, 9000, 4);
+        ioContext.run();
     }
     catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;

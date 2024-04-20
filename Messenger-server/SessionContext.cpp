@@ -16,23 +16,36 @@ void SessionContext::set_session(std::shared_ptr<Session> session) {
 
 
 void SessionContext::set_message(std::string mess) {
-	std::istringstream json_mess(mess);
-	boost::property_tree::ptree json_data;
+	try {
+		std::istringstream json_mess(mess);
+		boost::property_tree::ptree json_data;
 
-	boost::property_tree::read_json(json_mess, json_data);
+		boost::property_tree::read_json(json_mess, json_data);
 
-	std::string command = json_data.get<std::string>("command");
+		std::string command = json_data.get<std::string>("command");
 
-	if (command == "initialize") {
-		initialize(json_data);
+		if (command == "initialize") {
+			initialize(json_data);
+		}
+		else if (command == "send_message")
+		{
+			send_message(json_data);
+		}
+		else if (command == "add_new_user")
+		{
+			add_new_user(json_data);
+		}
 	}
-	else if (command == "send_message")
-	{
-		send_message(json_data);
-	}
-	else if (command == "add_new_user")
-	{
-		add_new_user(json_data);
+	catch (std::exception e) {
+		boost::property_tree::ptree json_response;
+
+		json_response.put("command", "error");
+		json_response.put("text", e.what());
+
+		std::ostringstream response_string;
+		boost::property_tree::write_json(response_string, json_response);
+
+		write_(response_string.str());
 	}
 }
 
@@ -133,7 +146,11 @@ void SessionContext::initialize(boost::property_tree::ptree json) {
 	std::ostringstream response_string;
 	boost::property_tree::write_json(response_string, json_response);
 
-	session_.get()->doWrite(response_string.str());
+	write_(response_string.str());
+}
+
+void SessionContext::write_(std::string str) {
+	session_.get()->doWrite(str);
 }
 
 void SessionContext::send_message(boost::property_tree::ptree json) {
@@ -165,7 +182,7 @@ void SessionContext::add_new_user(boost::property_tree::ptree json) {
 	current_user.get()->set_history_messaging(new_hist);
 	memory_access.get()->save_history_messaging(*(new_hist.get()));
 
-	shared_context->create_history_messaging(current_user.get()->get_username(), username);
+	shared_context->create_history_messaging(current_user.get()->get_username(), username, new_hist);
 }
 
 boost::property_tree::ptree SessionContext::parse_history_messaging(std::shared_ptr<History_messaging> hist) {

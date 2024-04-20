@@ -13,7 +13,7 @@ User::User(const User& other) {
 	this->username = std::string(other.username);
 	this->first_name = std::string(other.first_name);
 	this->second_name = std::string(other.second_name);
-	this->histories_messaging = other.histories_messaging;
+	this->histories_messaging = std::vector<std::shared_ptr<History_messaging>>(other.histories_messaging);
 	mtx_histories_messaging = new std::mutex();
 }
 

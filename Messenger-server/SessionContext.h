@@ -13,11 +13,12 @@ public:
 	SessionContext();
 	void set_session(std::shared_ptr<Session> session);
 	void set_message(std::string mess);
-	void set_responce_new_user(std::shared_ptr<User> new_user);
-	void set_responce_new_message(Message message);
-	void set_responce_send_message(Message message);
-	void set_responce_new_chat(std::string interlocutor_username);
+	virtual void set_responce_new_user(std::shared_ptr<User> new_user);
+	virtual void set_responce_new_message(Message message);
+	virtual void set_responce_send_message(Message message);
+	virtual void set_responce_new_chat(std::string interlocutor_username);
 	std::shared_ptr<User> get_user();
+	virtual void write_(std::string str);
 private:
 	std::shared_ptr<MemoryAccess> memory_access;
 	std::shared_ptr<User> current_user;

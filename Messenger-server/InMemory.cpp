@@ -92,7 +92,7 @@ std::shared_ptr<User> InMemory::get_user(std::string username) {
 std::shared_ptr<User> InMemory::create_user(int index) {
 	std::lock_guard<std::recursive_mutex> guard(*mtx);
 	std::shared_ptr<User> user = std::make_shared<User>(users[index].get_username(), users[index].get_first_name(), users[index].get_second_name());
-	for (int i = 0; i < users[i].get_size_histories_messaging(); i++) {
+	for (int i = 0; i < users[index].get_size_histories_messaging(); i++) {
 		History_messaging cur_history = *(users[index].get_history_messaging(i).get());
 
 		std::shared_ptr<History_messaging> hist = std::make_shared<History_messaging>(cur_history);
